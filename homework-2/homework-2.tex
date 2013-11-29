@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{ET4340 Electronics for Quantum Computing\\Homework 2}
+\author{
+    Mick van Gelderen\\4091566
+}
+\date{November 2013}
+
+\usepackage[a4paper]{geometry}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{framed}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{ifmtarg}
+
+\newcommand{\pauli}[1]{
+    \ensuremath{
+        \begin{pmatrix}
+            \if#1x
+                0 & 1 \\
+                1 & 0 \\
+            \fi\if#1y
+                0 & -i \\
+                i & 0 \\
+            \fi\if#1z
+                1 & 0 \\
+                0 & -1 \\
+            \fi
+        \end{pmatrix}
+    }
+}
+
+\newcommand{\paulisigma}[1]{%
+    \ensuremath{\sigma{}_{#1}}%
+}
+
+\newcommand{\rsqrt}[1]{\ensuremath{\frac{1}{\sqrt{#1}}}}
+
+\setlength{\parskip}{0.5em plus4mm minus3mm}
+
+\begin{document}
+
+\maketitle
+
+\paragraph{Problem 1: The Bell basis}
+
+In class, we introduced the \emph{Bell states}
+\begin{align*}
+    \ket{\Psi_+} &= \rsqrt{2} (\ket{01} + \ket{10}) \\
+    \ket{\Psi_-} &= \rsqrt{2} (\ket{01} - \ket{10}) \\
+    \ket{\Phi_+} &= \rsqrt{2} (\ket{00} + \ket{11}) \\
+    \ket{\Phi_-} &= \rsqrt{2} (\ket{00} - \ket{11}) \\
+\end{align*}
+Like the computational basis ${\ket{00}, \ket{01}, \ket{10}, \ket{11}}$, this set of states forms a basis for the fourdimensional Hilbert space of two qubits. Show that this basis is ortho-normal. That is:
+\begin{enumerate}
+    \item Show that the inner product of every Bell state with itself is unity. Thus, show that $\braket{\Psi_-|\Psi_-} = I$.
+\end{enumerate}
+\end{document}
+

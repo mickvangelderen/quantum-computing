@@ -1,0 +1,360 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"beg",
+				"begin	\\begin{}…\\end{}"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "homework-1/homework-1.tex",
+			"settings":
+			{
+				"buffer_size": 9688,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "homework-2/Homework2_ET4340.pdf",
+			"settings":
+			{
+				"buffer_size": 1561552,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "homework-2/homework-2.tex",
+			"settings":
+			{
+				"buffer_size": 1600,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"bash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"java",
+				"Set Syntax: Java"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/mick/AppData/Local/Temp/Rar$DIa0.778/minijava.str",
+		"/C/Users/mick/AppData/Local/Temp/Rar$DIa0.891/desugar.str",
+		"/C/Users/mick/AppData/Local/Temp/Rar$DIa0.113/desugar.str",
+		"/C/Users/mick/AppData/Local/Temp/Rar$DIa0.354/desugar.str",
+		"/C/Users/mick/Dropbox/Mick van Gelderen Computer Engineering study programe.xlsx",
+		"/C/Users/mick/projects/quantum-computing/homework-1/Homework1_ET4340.pdf",
+		"/C/apps/git/etc/profile",
+		"/C/Users/mick/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/mick/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/mick/.bash_profile",
+		"/C/apps/git/etc/motd",
+		"/C/apps/git/etc/git-completion.bash",
+		"/C/apps/git/etc/gitconfig",
+		"/C/apps/git/etc/inputrc",
+		"/C/Users/mick/.bash_custom",
+		"/C/Users/mick/.ssh/id_rsa.pub",
+		"/C/Users/mick/projects/modern-computer-architecture/documents/.gitignore",
+		"/C/Users/mick/.bashrc",
+		"/C/Users/mick/Documents/regmouse.reg",
+		"/C/Users/mick/Desktop/report.csv",
+		"/C/Users/mick/projects/modern-computer-architecture/documents/papers/introduction.tex",
+		"/C/Users/mick/AppData/Roaming/Sublime Text 3/Packages/LaTeXTools/LaTeXTools Preferences.sublime-settings",
+		"/C/Users/mick/AppData/Roaming/Sublime Text 3/Packages/LaTeXTools/viewPDF.py",
+		"/C/Users/mick/AppData/Roaming/Sublime Text 3/Packages/LaTeXTools/LaTeX.sublime-build"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Theta_",
+			"Psi",
+			"+",
+			"mdframed",
+			"\\begin{align*}%",
+			"\\begin{align*}",
+			"{framed}",
+			"Y",
+			"} ",
+			"}\n",
+			"intertext",
+			"framed",
+			"subquestion",
+			"\\subquestion",
+			"questioncounter",
+			"subquestion",
+			"Problem 1: ",
+			"\\item",
+			"TRANSPOSED",
+			"≡",
+			"†",
+			"enumeration",
+			"x y z",
+			"paulisigma",
+			"model",
+			":\\d\\d b",
+			"x",
+			";",
+			" parameter reference ",
+			"parameter reference",
+			"field reference",
+			"un get-type to",
+			"\\bf\\b",
+			"VV",
+			"TT",
+			"select",
+			"workspace",
+			"switch",
+			"project"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "homework-1/homework-1.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9688,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								154,
+								154
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 51.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "homework-2/Homework2_ET4340.pdf",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1561552,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "homework-2/homework-2.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1600,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1567,
+								1567
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 392.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"project": "quantum-computing.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"2",
+				"homework-2\\homework-2.tex"
+			],
+			[
+				"bib",
+				"documents\\papers\\main.bib"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"com",
+				"C:\\Users\\mick\\projects\\compiler-construction\\compiler-construction.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 431.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

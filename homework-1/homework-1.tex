@@ -1,0 +1,280 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{ET4340 Electronics for Quantum Computing\\Homework 1}
+\author{
+    Mick van Gelderen\\4091566
+}
+\date{November 2013}
+
+\usepackage[a4paper]{geometry}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{framed}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{ifmtarg}
+
+\newcommand{\pauli}[1]{
+    \ensuremath{
+        \begin{pmatrix}
+            \if#1x
+                0 & 1 \\
+                1 & 0 \\
+            \fi\if#1y
+                0 & -i \\
+                i & 0 \\
+            \fi\if#1z
+                1 & 0 \\
+                0 & -1 \\
+            \fi
+        \end{pmatrix}
+    }
+}
+
+\newcommand{\paulisigma}[1]{%
+    \ensuremath{\sigma{}_{#1}}%
+}
+
+\setlength{\parskip}{0.5em plus4mm minus3mm}
+
+\newcounter{questioncounter}
+\newcounter{subquestioncounter}[questioncounter]
+
+\makeatletter
+\newcommand{\question}[1]{%
+    \refstepcounter{questioncounter}%
+    \parindent -2em%
+    \textbf{%
+        Question \thequestioncounter%
+        \@ifnotmtarg{#1}{: #1}%
+    }%
+    \parindent 0em%
+    \par %
+}
+\makeatother
+
+\newcommand{\subquestion}{%
+    \refstepcounter{subquestioncounter}%
+    \parindent -1em%
+    \textbf{%
+        \thequestioncounter.\thesubquestioncounter%
+    }%
+    \parindent 0em%
+    \par%
+}
+
+\newenvironment{answer}{%
+    \begingroup%
+    \leftskip 0em%
+    \parindent 0em%
+    \begin{framed}%
+}{%
+    \end{framed}%
+    \endgroup%
+}
+
+\newenvironment{questions}{%
+    \setcounter{questioncounter}{0}%
+    \setcounter{subquestioncounter}{0}%
+    \begingroup%
+    \leftskip 2em             % indentation for lines except first line
+    \parindent 0em           % first line: no indentation
+}{%
+    \endgroup%
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{questions}
+
+\question{Pauli matrices}
+
+Throughout this course, we will make extensive use of the Pauli sigma operators. In the computational basis $\{\ket{0}$,$\ket{1}\}$, they are represented by the matrices
+
+\begin{center}
+$X = \pauli{x}$, $Y = \pauli{y}$, $Z = \pauli{z}$.
+\end{center}
+
+They are often denoted as \paulisigma{x}, \paulisigma{y} and \paulisigma{z} respectively. In this problem we ask you to prove several simple properties of these matrices.
+
+\subquestion Show that these matrices are hermitian. The matrix A is hermitian iff $A = A^\dagger$.
+
+\begin{answer}
+For $X$ and $Z$ we simply transpose the matrix, i.e. for every row $i$ we create a column $i$. The $Y$ has complex entries and they have to be conjugated in combination with transposing the matrix. The results are $X = X^\dagger$, $Y = Y^\dagger$ and $Z = Z^\dagger$.
+\end{answer}
+
+\subquestion Show that these matrices are unitary. The matrix A is unitary iff $A^{\dagger}A = AA^\dagger = I$.
+
+\begin{answer}
+\begin{align*}
+X^{\dagger}X = XX = \pauli{x}\pauli{x} = \begin{pmatrix} 0*0 + 1*1 & 0*1 + 1*0 \\ 1*0 + 0*1 & 1*1 + 0*0 \end{pmatrix} = I
+\end{align*}
+
+This also holds for $Y$ and $Z$ with slightly different computations.
+
+\end{answer}
+
+\subquestion Show that $[Y,Z] = 2iX$, and $\{Y,Z\} = 0$, where $[A,B] \equiv AB-BA$ and $\{A,B\} \equiv AB+BA$. Denote commutation and anticommutation, respectively.
+
+\begin{answer}
+commutation
+\begin{align*}
+[Y,Z] \equiv YZ - ZY
+    &= \pauli{y}\pauli{z} - \pauli{z}\pauli{y}
+\\  &= \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix} - \begin{pmatrix} 0 & -i \\ -i & 0 \end{pmatrix}
+\\  &= \begin{pmatrix} 0 & 2i \\ 2i & 0 \end{pmatrix}
+\\  &= 2i\paulisigma{x}
+\\
+\intertext{anticommutation}
+\{Y,Z\} \equiv YZ + ZY
+    &= \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix} + \begin{pmatrix} 0 & -i \\ -i & 0 \end{pmatrix}
+\\  &= \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = 0_{2,2}
+\end{align*}
+\end{answer}
+
+\subquestion Show that $X^n = X$ for odd integers n, and $X^n = I$ for even integers n. (Note: similar expressions hold for powers of Y and Z.)
+
+\begin{answer}
+Say $n$ is even, then we can substitute $n$ with $2m$ where $m$ is an integer. This gives us $X^n = X^{2m}$ which can be written as $\left(X^2\right)^m$. Since $X^2 = I$, the expression becomes $I^m = I$.
+
+If $n$ is odd, we can write $X^n = X^{2m + 1} = XX^{2m} = XI = X$.
+\end{answer}
+
+\question{A second reason why the Bloch vector representation is useful}
+In class, we saw how operations on single qubits can be visualized as rotations on the Bloch sphere. Here, you derive a simple connection between the cartesian coordinates of the Bloch vector and the expected value of Pauli measurements.
+
+Consider a qubit in the state
+
+\begin{align*}
+    \ket{\Psi} = \cos(\theta/2)\ket{0} + e^{i\phi}\sin(\theta/2)\ket{1}
+\end{align*}
+
+\subquestion Write the cartesian coordinates of the associated Bloch vector $v$.
+
+\begin{answer}
+\begin{align*}
+    \ket{\Psi} = a_0\ket{0} + a_1\ket{1} \doteq \begin{bmatrix} a_0 \\ a_1 \end{bmatrix}
+\end{align*}
+\end{answer}
+
+\subquestion Derive an expression for the expected value of a measurement of $X$, given by $\bra{\Psi}X\ket{\Psi}$. How does this quantity relate to the cartesian coordinates of $v$?
+
+\begin{answer}
+\begin{align*}
+    \bra{\Psi}X\ket{\Psi} &= \begin{bmatrix} a_0^* & a_1^* \end{bmatrix} \pauli{x} \begin{bmatrix} a_0 \\ a_1 \end{bmatrix}
+    = \begin{bmatrix} a_0^* & a_1^* \end{bmatrix} \begin{pmatrix} 0 & a_1 \\ a_0 & 0 \end{pmatrix}
+\\  &= a_1^*a_0 + a_0^*a_1
+\end{align*}
+\end{answer}
+
+\subquestion Similarly, derive an expression for the expected value of a measurement of $Y$, and relate it to a cartesian coordinate of $v$.
+
+\begin{answer}
+\begin{align*}
+    \bra{\Psi}Y\ket{\Psi} &= \begin{bmatrix} a_0^* & a_1^* \end{bmatrix} \pauli{y} \begin{bmatrix} a_0 \\ a_1 \end{bmatrix}
+    = \begin{bmatrix} a_0^* & a_1^* \end{bmatrix} \begin{pmatrix} 0 & -ia_1 \\ ia_0 & 0 \end{pmatrix}
+\\  &= a_1^*ia_0 - a_0^*ia_1
+\end{align*}
+\end{answer}
+
+\subquestion Similarly, derive an expression for the expected value of a measurement of $Z$, and relate it to a cartesian coordinate of $v$.
+
+\begin{answer}
+\begin{align*}
+    \bra{\Psi}Z\ket{\Psi} &= \begin{bmatrix} a_0^* & a_1^* \end{bmatrix} \pauli{z} \begin{bmatrix} a_0 \\ a_1 \end{bmatrix}
+    = \begin{bmatrix} a_0^* & a_1^* \end{bmatrix} \begin{pmatrix} a_0 & 0 \\ 0 & -a_1 \end{pmatrix}
+\\  &= a_0^*a_0 - a_1^*a_1
+\\  &= |a_0|^2 - |a_1|^2
+\\  &= \cos^2(\theta/2) - \sin^2(\theta/2) \textnormal{ (from the slides)}
+\\  &= \cos(\theta)
+\end{align*}
+\end{answer}
+
+\subquestion Verify that $\braket{X}^2 + \braket{Y}^2 + \braket{Z}^2 = 1$.
+
+\begin{answer}
+    what does $\braket{X}$ mean?
+\end{answer}
+
+\question{Quantum state tomography}
+In the lab, we are often faced with the task of inferring the quantum state $\ket{\Psi}$ of a qubit produced at the output of some quantum circuit. This task, known as quantum state tomography, goes as follows: Run the circuit and perform a measurement many times for $X$, for $Y$ and for $Z$. Estimate the Bloch vector corresponding to $\ket{\Psi}$ by calculating the average of you X measurements, your Y measusrements and your Z measurements.
+
+\subquestion You walk in the lab and Cristian reports to you these measurement results:\\
+    Measurements of X: +1, +1, -1, +1, -1, +1, -1, -1, +1, -1,...\\
+    Measurements of Y : always -1.\\
+    Measurements of Z: -1, -1, +1, +1, -1, +1, -1, +1, +1, -1,...\\
+    What is your estimate of $\ket{\Psi}$?
+
+\begin{answer}
+$\ket{\Psi}$ is probably $\frac{1}{\sqrt{2}}(\ket{0}-i\ket{1})$. The measurements of X and Z seem to be 50/50 so the Bloch vector doesn't `point' in the direction of X nor Z. It does point in the negative direction of Y.
+\end{answer}
+
+\subquestion You walk in the lab and Christian reports to you the measurement results:\\
+Measurements of X: +1, +1, -1, +1, -1, +1, -1, -1, +1, -1,...\\
+Measurements of Y : always -1.\\
+Measurements of Z: always +1.\\
+What do you say to Christian in this case?
+
+\begin{answer}
+Its probably
+\begin{align*}
+    \ket{\Psi} &= \frac{1}{\sqrt{2}}(\ket{0} + \frac{1}{\sqrt{2}}(\ket{0}-i\ket{1}))
+\\  &= \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{2}\ket{0} + \frac{1}{2}i\ket{1}
+\\  &= \frac{1 + \sqrt{2}}{2}\ket{0} - \frac{i}{2}\ket{1}
+\end{align*}
+\end{answer}
+
+\question{Quantum compiling}
+In programming a quantum computer, it pays to simplify a quantum circuit to the minimal number of gates required. You also have to figure out how to realize a quantum gate using the set of gates that you can actually implement with your hardware. As mentioned in class, the gates that we can easily implement in the lab are the rotation gates $R_{\hat{n}}(\theta) = \cos(\theta/2)I - i\sin(\theta/2)\hat{n}\cdot\vec{\sigma}$.
+
+\subquestion Show that $H^2 = I$.
+
+\begin{answer}
+\begin{align*}
+    H^2 &= \left(\frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}\right)^2
+\\  &= 1/2\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
+\\  &= 1/2 \begin{pmatrix} 1*1 + 1*1 & 1*1 + 1*-1 \\ 1*1 + -1*1 & 1*1 + -1*-1 \end{pmatrix}
+\\  &= 1/2 \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} = I
+\end{align*}
+\end{answer}
+
+\subquestion Show that $HXHHXH = I$.
+
+\begin{answer}
+\begin{align*}
+    HX(HH)XH = HXIXH = H(XX)H = HIH = HH = I
+\end{align*}
+\end{answer}
+
+\subquestion Show that $HXHHYH = iX = R_{\hat{x}}(-\pi)$.
+
+\begin{answer}
+\hfill\\
+\hfill\\
+\hfill\\
+\end{answer}
+\subquestion Show that $H = iR_{\hat{n}}(\pi)$ for $\hat{n} = \frac{1}{\sqrt{2}}(\hat{x} + \hat{z})$.
+
+\begin{answer}
+\begin{align*}
+    iR_{\hat{n}}(\pi) &= \cos(\theta/2)I - i\sin(\theta/2)\hat{n}\cdot\vec{\sigma}
+\\  &= \cos(\theta/2)I - i\sin(\theta/2)\frac{\hat{x} + \hat{z}}{\sqrt{2}}\cdot\vec{\sigma}
+\end{align*}
+\end{answer}
+
+\subquestion Show that $H = iR_{\hat{x}}(\pi)R_{\hat{y}}(\pi/2)$.
+
+\begin{answer}
+\hfill\\
+\hfill\\
+\hfill\\
+\end{answer}
+
+\end{questions}
+
+
+\end{document}
