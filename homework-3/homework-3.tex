@@ -165,8 +165,77 @@ The two input qubits are initially prepared in the maximal superposition state $
     \item Suppose that when $m = -1$, and only then, you apply $X$ to one of the qubits (this implements a form of feedback control). What will the final state be in this case?
 
     \begin{answer}
+    	We apply $I \otimes X$ to $\ket{\Psi_+}$ and obtain $\ket{\Phi_-}$
+    \end{answer}
 
+    \item Can you think of a strategy to deterministically produce $\ket{\Psi_-}$ using measurement?
+
+    \begin{answer}
+    	We can apply $Z \otimes X$ when measuring $m = +1$ and $Z \otimes I$ when measuring $m = -1$. So we basically need a controlled $X$ gate. 
     \end{answer}
 \end{enumerate}
+
+\paragraph{Problem 3: Encoding boolean functions in unitaries}
+
+\begin{center}\includegraphics[width=.6\textwidth]{problem-3.png}\end{center}
+
+Above, you see a more complicated quantum circuit than in Quiz \#3. As in Quiz \#3, the top register has two qubits and the lower register has just one. However, the quantum unitary uses two internal ancilla qubits. 
+
+\begin{enumerate}
+	\item What is the state of the ancilla qubits immediately after the unitary? Does the answer depend on the input state of the top and bottom registers?
+
+	\begin{answer}
+		The ancilla qubits will always end in the state they were initialized in which in this case is $\ket{00}$. The top ancilla qubit is flipped twice and used as a control in a \CNOT{} gate. The bottom ancilla qubit is flipped twice by each register where the registers have the same state at the points of flipping. 
+	\end{answer}
+
+	\item Assume you enter a maximal superposition state
+
+	\begin{align*}
+		\frac{1}{2}(\ket{00} + \ket{01} + \ket{10} + \ket{11})
+	\end{align*}
+
+	in the top register and $\ket{0}$ in the bottom register. After the unitary $U_f$, you measure the lower-register qubit in the $z$ basis and get $m = +1$. Is the final state of the two qubits in the top register an entangled or a product state?
+
+	\begin{answer}
+		The top register will be in the state $\rsqrt{3}(\ket{00} + \ket{10} + \ket{11})$ which is an entangled state because it cannot be written as a product state. 
+	\end{answer}
+
+	\item Give the truth table with input and output of both registers. Why are the ancillas not included here?
+
+	\begin{answer}
+		\begin{tabular}{c c | c}
+			$x_2$ & $x_1$ & $y$ \\
+			\hline
+			0 & 0 & 0 \\
+			0 & 1 & 1 \\
+			1 & 0 & 0 \\
+			1 & 1 & 0 \\
+		\end{tabular}
+		The ancilla qubits are not included since they are neither inputs nor outputs and they return to their initial state. 
+	\end{answer}
+
+	\item Deduce the encoded boolean function $f(x)$
+
+	\begin{answer}
+		$f(x_2, x_1) = x_{1}\neg{}x_2$
+	\end{answer}
+
+	\item Can you derive another quantum circuit that encodes this boolean and does not make use of any ancilla qubits?
+
+	\begin{answer}
+		A three qubit system $x_2$, $x_1$ and $y$ where $x_2$ and $x_1$ serve as a respectively negated control and a control for a flip on $y$. 
+
+		\begin{center}\includegraphics[width=.3\textwidth]{problem-3-5.png}\end{center}
+	\end{answer}
+\end{enumerate}
+
+\paragraph{Problem 4: Grover's algorithm}
+
+In this problem, we will look further into Grover's algorithm. You can approach this problem in whichever way is more comfortable for you, analytically or by writing a simple program in your favorite language (Matlab, C, ...). If you do it with a program, please include your code.
+
+\begin{enumerate}
+ 	\item In class, we showed that the $N \times N$ matrix corresponding to Grover's analysis step, implementing \emph{inversion about the mean}, has elements $M_{ij} = \frac{2}{N}$ for $i \neq j$, and $M_{ij} = -1 + \frac{2}{N}$. Verify that this matrix in unitary. That is show $M^\dagger{}M = MM^\dagger = I$. 
+ 	
+ \end{enumerate} 
 \end{document}
 
