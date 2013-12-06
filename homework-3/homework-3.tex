@@ -150,6 +150,23 @@ The two input qubits are initially prepared in the maximal superposition state $
         If you apply $I \otimes I \otimes Z$ the resulting vector contains two $+1$'s and two $-1$'s which kind of strengthens my belief but I cannot give a sound reasoning.
     \end{answer}
 
+    \item What is the final state of the two qubits when the ancilla measurement gives $m = +1$?
+
+    \begin{answer}
+        $\ket{\Psi_2}$ can be written as $\frac{1}{2}\left((\ket{00} + \ket{11})\otimes\ket{0} + (\ket{01} + \ket{10})\otimes\ket{1}\right)$. If the measurement is $m = +1$, the ancilla qubit is in the state $\ket{0}$ so the other two qubits are in $\rsqrt{2}(\ket{00} + \ket{11})$ which is the Bell state $\ket{\Phi_+}$.
+    \end{answer}
+
+    \item What is the final state of the two qubits when the ancilla measurement gives $m = -1$?
+
+    \begin{answer}
+        The Bell state $\ket{\Psi_+}$.
+    \end{answer}
+
+    \item Suppose that when $m = -1$, and only then, you apply $X$ to one of the qubits (this implements a form of feedback control). What will the final state be in this case?
+
+    \begin{answer}
+
+    \end{answer}
 \end{enumerate}
 \end{document}
 
