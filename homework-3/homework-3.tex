@@ -171,7 +171,7 @@ The two input qubits are initially prepared in the maximal superposition state $
     \item Can you think of a strategy to deterministically produce $\ket{\Psi_-}$ using measurement?
 
     \begin{answer}
-    	We can apply $Z \otimes X$ when measuring $m = +1$ and $Z \otimes I$ when measuring $m = -1$. So we basically need a controlled $X$ gate. 
+    	We can apply $Z \otimes X$ when measuring $m = +1$ and $Z \otimes I$ when measuring $m = -1$. So we basically need a controlled $X$ gate.
     \end{answer}
 \end{enumerate}
 
@@ -179,13 +179,13 @@ The two input qubits are initially prepared in the maximal superposition state $
 
 \begin{center}\includegraphics[width=.6\textwidth]{problem-3.png}\end{center}
 
-Above, you see a more complicated quantum circuit than in Quiz \#3. As in Quiz \#3, the top register has two qubits and the lower register has just one. However, the quantum unitary uses two internal ancilla qubits. 
+Above, you see a more complicated quantum circuit than in Quiz \#3. As in Quiz \#3, the top register has two qubits and the lower register has just one. However, the quantum unitary uses two internal ancilla qubits.
 
 \begin{enumerate}
 	\item What is the state of the ancilla qubits immediately after the unitary? Does the answer depend on the input state of the top and bottom registers?
 
 	\begin{answer}
-		The ancilla qubits will always end in the state they were initialized in which in this case is $\ket{00}$. The top ancilla qubit is flipped twice and used as a control in a \CNOT{} gate. The bottom ancilla qubit is flipped twice by each register where the registers have the same state at the points of flipping. 
+		The ancilla qubits will always end in the state they were initialized in which in this case is $\ket{00}$. The top ancilla qubit is flipped twice and used as a control in a \CNOT{} gate. The bottom ancilla qubit is flipped twice by each register where the registers have the same state at the points of flipping.
 	\end{answer}
 
 	\item Assume you enter a maximal superposition state
@@ -197,45 +197,159 @@ Above, you see a more complicated quantum circuit than in Quiz \#3. As in Quiz \
 	in the top register and $\ket{0}$ in the bottom register. After the unitary $U_f$, you measure the lower-register qubit in the $z$ basis and get $m = +1$. Is the final state of the two qubits in the top register an entangled or a product state?
 
 	\begin{answer}
-		The top register will be in the state $\rsqrt{3}(\ket{00} + \ket{10} + \ket{11})$ which is an entangled state because it cannot be written as a product state. 
+		The top register will be in the state $\rsqrt{3}(\ket{00} + \ket{10} + \ket{11})$ which is an entangled state because it cannot be written as a product state.
 	\end{answer}
 
 	\item Give the truth table with input and output of both registers. Why are the ancillas not included here?
 
 	\begin{answer}
-		\begin{tabular}{c c | c}
-			$x_2$ & $x_1$ & $y$ \\
-			\hline
-			0 & 0 & 0 \\
-			0 & 1 & 1 \\
-			1 & 0 & 0 \\
-			1 & 1 & 0 \\
-		\end{tabular}
-		The ancilla qubits are not included since they are neither inputs nor outputs and they return to their initial state. 
+		\begin{center}
+            \begin{tabular}{c c | c}
+                $x_2$ & $x_1$ & $y$ \\
+                \hline
+                0 & 0 & 0 \\
+                0 & 1 & 1 \\
+                1 & 0 & 0 \\
+                1 & 1 & 0 \\
+            \end{tabular}
+        \end{center}
+		The ancilla qubits are not included since they are neither inputs nor outputs and they return to their initial state.
 	\end{answer}
 
 	\item Deduce the encoded boolean function $f(x)$
 
 	\begin{answer}
-		$f(x_2, x_1) = x_{1}\neg{}x_2$
+		\begin{align*}f(x_2, x_1) = x_{1}\neg{}x_2\end{align*}
 	\end{answer}
 
 	\item Can you derive another quantum circuit that encodes this boolean and does not make use of any ancilla qubits?
 
 	\begin{answer}
-		A three qubit system $x_2$, $x_1$ and $y$ where $x_2$ and $x_1$ serve as a respectively negated control and a control for a flip on $y$. 
+		A three qubit system $x_2$, $x_1$ and $y$ where $x_2$ and $x_1$ serve as a respectively negated control and a control for a flip on $y$.
 
-		\begin{center}\includegraphics[width=.3\textwidth]{problem-3-5.png}\end{center}
+		\begin{center}\includegraphics[height=.2\textwidth]{problem-3-5.png}\end{center}
 	\end{answer}
 \end{enumerate}
 
-\paragraph{Problem 4: Grover's algorithm}
+\paragraph{Problem 4: Grover's algorithm} \hfill \\
 
 In this problem, we will look further into Grover's algorithm. You can approach this problem in whichever way is more comfortable for you, analytically or by writing a simple program in your favorite language (Matlab, C, ...). If you do it with a program, please include your code.
 
 \begin{enumerate}
- 	\item In class, we showed that the $N \times N$ matrix corresponding to Grover's analysis step, implementing \emph{inversion about the mean}, has elements $M_{ij} = \frac{2}{N}$ for $i \neq j$, and $M_{ij} = -1 + \frac{2}{N}$. Verify that this matrix in unitary. That is show $M^\dagger{}M = MM^\dagger = I$. 
- 	
- \end{enumerate} 
+ 	\item In class, we showed that the $N \times N$ matrix corresponding to Grover's analysis step, implementing \emph{inversion about the mean}, has elements $M_{N_{ij}} = \frac{2}{N}$ for $i \neq j$, and $M_{N_{ij}} = -1 + \frac{2}{N}$. Verify that this matrix in unitary. That is show $M_N^\dagger{}M_N = M_NM_N^\dagger = I$.
+
+    \begin{answer}
+        This problem is actually pretty simple if we split the matrix $M_N$ up into a all-ones matrix $J_N$ and an identity matrix $I_N$.
+
+        The all-ones matrix of size 3 for example is:
+        \begin{align*}
+            J_3 &= \pmat{1&1&1\\1&1&1\\1&1&1}
+        \intertext{Now $M_N$ can be written as:}
+            M_N &= \frac{2}{N}J_N - I_N
+        \intertext{Since the Hermitian operator is distributive we can see that $M_N^\dagger = M_N$:}
+            M_N^\dagger &= \frac{2}{N}J_N^\dagger - I_N^\dagger = \frac{2}{N}J_N - I_N = M_N
+        \intertext{So computing $M_NM_N^\dagger = M_N^\dagger{}M_N = I$ comes down to computing $M_NM_N = I$ which can be done as follows:}
+            M_NM_N &= \left(\frac{2}{N}J_N - I_N\right)^2 \\
+                &= \left(\frac{2}{N}\right)^2\cdot{}J_N^2 - \frac{2}{N}J_NI_N - I_N\frac{2}{N}J_N + I_N^2 \\
+                &= \frac{4}{N^2}N\cdot{}J_N - \frac{2}{N}J_N - \frac{2}{N}J_N + I_N \\
+                &= \frac{4}{N}J_N - 2\frac{2}{N}J_N + I_N \\
+                &= I_N \\
+        \end{align*}
+    \end{answer}
+
+    \item Consider the situation where the search function has two solutions, instead of just one, and suppose $N = 2^{10}$. Will Grover's algorithm work? If so, is it equally likely to find either of the two solutions, or will it always find one of them?
+
+    \begin{answer}
+        Yes, Grover's algorithm will still work for multiple solutions and yes, all solutions are equally likely to be found.
+    \end{answer}
+
+    \item How many Grover iterations will it require to find one of the answers?
+
+    \begin{answer}
+        With a single solution it will take about $\frac{\pi}{4}\sqrt{N}$ Grover iterations. For two solutions the probability of finding the right solutions will go to 1 twice as fast so $\frac{\pi}{2}\sqrt{N}$ or so my intuition told me.
+    \end{answer}
+\end{enumerate}
+
+\paragraph{Problem 5: Fidelity to a Bell state as an entanglement witness} \hfill \\
+
+The fidelity of a two-qubit state $\ket{\psi}$ to a reference state $\ket{\psi_{ref}}$ is defined as:
+
+\begin{align*}
+    \mathcal{F} = |\braket{\psi|\psi_{ref}}|^2
+\end{align*}
+
+Consider the set of all unentangled two-qubit states. That is, all states of the form
+\begin{align*}
+    \ket{\psi(\theta_2, \phi_2, \theta_1, \phi_1)} =
+        \left(\cos{\frac{\theta_2}{2}}\ket{0} + e^{i\phi_2}\sin{\frac{\theta_2}{2}}\ket{1}\right) \otimes
+        \left(\cos{\frac{\theta_1}{2}}\ket{0} + e^{i\phi_1}\sin{\frac{\theta_1}{2}}\ket{1}\right)
+\end{align*}
+
+\begin{enumerate}
+    \item Prove that the fidelity of $\ket{\psi(\theta_2, \phi_2, \theta_1, \phi_1)}$ to the Bell state $\ket{\Phi_+}$ cannot exceed $50\%$ for any choice of $\theta_2$, $\phi_2$, $\theta_1$ and  $\phi_1$.
+
+    \begin{answer}
+        Lets write $\ket{\psi(\theta_2, \phi_2, \theta_1, \phi_1)}$ as a matrix:
+        \begin{align*}
+            \ket{\psi(\theta_2, \phi_2, \theta_1, \phi_1)} &= \pmat{
+                \cos{\frac{\theta_2}{2}}\cos{\frac{\theta_1}{2}} \\
+                e^{i\phi_1}\cos{\frac{\theta_2}{2}}\sin{\frac{\theta_1}{2}} \\
+                e^{i\phi_2}\cos{\frac{\theta_1}{2}}\sin{\frac{\theta_2}{2}} \\
+                e^{i\phi_1 + i\phi_2}\sin{\frac{\theta_2}{2}}\sin{\frac{\theta_1}{2}} \\
+            }
+        \intertext{Now we can calculate $\mathcal{F}$:}
+            \mathcal{F} &= |\braket{\psi(\theta_2, \phi_2, \theta_1, \phi_1)|\Phi_+}|^2 \\
+                &= \left|\rsqrt{2}\left(
+                    \cos{\frac{\theta_2}{2}}\cos{\frac{\theta_1}{2}} +
+                    e^{i\phi_1 + i\phi_2}\sin{\frac{\theta_2}{2}}\sin{\frac{\theta_1}{2}}
+                \right)\right|^2 \\
+                &= \frac{1}{2}\left|
+                    \cos{\frac{\theta_2}{2}}\cos{\frac{\theta_1}{2}} +
+                    e^{i\phi_1 + i\phi_2}\sin{\frac{\theta_2}{2}}\sin{\frac{\theta_1}{2}}
+                \right|^2 \\
+        \intertext{Using the product to sum rules we can write this as:}
+            \mathcal{F} &= \frac{1}{2}\left|
+                            \frac{
+                                \cos{\frac{\theta_2 + \theta_1}{2}}
+                            }{2} +
+                            \frac{
+                                \cos{\frac{\theta_2 - \theta_1}{2}}
+                            }{2} +
+                            e^{i\phi_1 + i\phi_2}\left(
+                                \frac{
+                                    \cos{\frac{\theta_2 + \theta_1}{2}}
+                                }{2} -
+                                \frac{
+                                    \cos{\frac{\theta_2 - \theta_1}{2}}
+                                }{2}
+                            \right)
+                        \right|^2 \\
+        \intertext{We substitute $\cos{\frac{\theta_2 \pm \theta_1}{2}}$ with $c_\pm$ to improve readability:}
+            \mathcal{F} &= \frac{1}{2}\left|
+                            \frac{c_+}{2} + \frac{c_-}{2} +
+                            e^{i\phi_1 + i\phi_2}\left(\frac{c_+}{2} - \frac{c_-}{2}\right)
+                        \right|^2 \\
+        \end{align*}
+        Lets look at the part between the magnitude operators:
+        \begin{align*}
+            \left|\frac{c_+}{2} + \frac{c_-}{2} +
+            e^{i\phi_1 + i\phi_2}\left(\frac{c_+}{2} - \frac{c_-}{2}\right)\right|
+                &\leq \left|\frac{c_+}{2} + \frac{c_-}{2}\right| - \left|e^{i\phi_1 + i\phi_2}\left(\frac{c_+}{2} - \frac{c_-}{2}\right)\right|
+        \intertext{Simplifying the right hand side:}
+            \left|\frac{c_+}{2} + \frac{c_-}{2}\right| - \left|e^{i\phi_1 + i\phi_2}\left(\frac{c_+}{2} - \frac{c_-}{2}\right)\right| &= \left|\frac{c_+}{2} + \frac{c_-}{2}\right| - \left|e^{i\phi_1 + i\phi_2}\right|\left|\frac{c_+}{2} - \frac{c_-}{2}\right| \\
+                &= \left|\frac{c_+}{2} + \frac{c_-}{2}\right| - \left|\frac{c_+}{2} - \frac{c_-}{2}\right|
+        \intertext{Both magnitudes are now at most $1$ because they are equal to $\frac{1}{2}$ times the sum of two cosines. This leaves us with: }
+            \mathcal{F} &\leq \frac{1}{2}|1|^2 = \frac{1}{2}
+        \end{align*}
+        This followed from the fact that the difference between two numbers that are at most $1$ is at most $1$.
+    \end{answer}
+
+    \item Note that the converse is not true: less than $50\%$ fidelity of a state with respect to $\ket{\Phi+}$ does not guarantee that the state is not entangled. Provide a simple example.
+
+    \begin{answer}
+        All the other Bell states are examples of entangled states with a fidelity of $0\%$ since they are orthagonal. This follows from the fact that the inner product of two orthagonal vectors is $0$.
+    \end{answer}
+\end{enumerate}
+
 \end{document}
 
