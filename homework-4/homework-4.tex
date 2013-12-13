@@ -104,7 +104,7 @@
 
 \paragraph{Problem 2: Generalized quantum kick-back} \hfill \\
 
-In the lectures, we have seen how the Deutsch and Bernstein-Vazirani quantum games exploit quantum kick-back to efficiently extract properties of $n$-to-1 bit boolean functions. In this problem, we generalize quantum kick-back to $n$-to-$m$ bit boolean functions encoded in unitary functions as usual: $U_f\ket{x}\ket{y} = \ket{x}\ket{(y + f(x)) \mod M}$ for computational states $\ket{x}$ and $\ket{y}$ in the top and bottom registers, respectively. Consider the circuit below.
+In the lectures, we have seen how the Deutsch and Bernstein-Vazirani quantum games exploit quantum kick-back to efficiently extract properties of $n$-to-1 bit boolean functions. In this problem, we generalize quantum kick-back to $n$-to-$m$ bit boolean functions encoded in unitary functions as usual: $U_f\ket{x}\ket{y} = \ket{x}\ket{(y + f(x)) \bmod M}$ for computational states $\ket{x}$ and $\ket{y}$ in the top and bottom registers, respectively. Consider the circuit below.
 
 \begin{center}\includegraphics[width=.5\textwidth]{problem-2.png}\end{center}
 
@@ -172,11 +172,11 @@ In this exercise, we will break RSA by period finding. $N$ will be small enough 
         \end{tabular}
     \end{answer}
 
-    \item Compute $8^0 \mod 21$, $8^1 \mod 21$, \ldots until you discover the period $r$ of $f(x) = 8^x \mod 21$.
+    \item Compute $8^0 \bmod 21$, $8^1 \bmod 21$, \ldots until you discover the period $r$ of $f(x) = 8^x \bmod 21$.
 
     \begin{answer}
         \begin{tabular}{c|c}
-            $n$ & $8^n \mod 21$ \\
+            $n$ & $8^n \bmod 21$ \\
             \hline
             0 & 1 \\
             1 & 8 \\
@@ -202,7 +202,7 @@ In this exercise, we will break RSA by period finding. $N$ will be small enough 
     \begin{answer}
         Finding the period:
         \begin{tabular}{c|c}
-            $n$ & $10^n \mod 21$ \\
+            $n$ & $10^n \bmod 21$ \\
             \hline
             0 & 1 \\
             1 & 10 \\
@@ -219,13 +219,61 @@ In this exercise, we will break RSA by period finding. $N$ will be small enough 
 
 \paragraph{Problem 4: Breaking RSA with Shor's algorithm} \hfill \\
 
-Now we will go through the steps of Shor's algorithm in order to find the period $r$ of $8^x\mod21$. For simplicity, lest us use just four qubits for the top register which is enough for our choice of $a = 8$.
+Now we will go through the steps of Shor's algorithm in order to find the period $r$ of $8^x\bmod21$. For simplicity, lest us use just four qubits for the top register which is enough for our choice of $a = 8$.
 \emph{Note: Please use decimal bra-ket notation instead of binary. }
 
 \begin{enumerate}
     \item Initialize each register to $\ket{0}$.
-\end{enumerate}
 
+    \begin{answer}
+    	Cool it down!
+    \end{answer}
+
+    \item Apply the hadamard gate to each qubit in the top register.
+
+    \begin{answer}
+    	The top register ends up in a state that is a combination of all possible 4 qubit computational states: $\rsqrt{16}\left(\ket{0} + \ket{1} + \dots + \ket{15}\right)$.
+    \end{answer}
+
+    \item Add $8^x\bmod21$ to the bottom register where $x$ is the state of the top register.
+
+    \begin{answer}
+    	We calculate $8^x\bmod21$ for $x \in \{0, 1, \dots 15\}$.
+
+    	\begin{tabular}{c|c||c|c}
+    		$x$ & $8^x\bmod21$ & $x$ & $8^x\bmod21$ \\
+    		\hline
+    		0 & 1 & 8 & 1 \\
+    		1 & 8 & 9 & 8 \\
+    		2 & 1 & 10 & 1 \\
+    		3 & 8 & 11 & 8 \\
+    		4 & 1 & 12 & 1 \\
+    		5 & 8 & 13 & 8 \\
+    		6 & 1 & 14 & 1 \\
+    		7 & 8 & 15 & 8 \\
+    	\end{tabular}
+
+    	So, $y$ must be $\rsqrt{16}\left(\ket{1} + \ket{8} + \ket{1} + \ket{8} \dots \ket{1} + \ket{8}\right)$.
+    \end{answer}
+
+    \item Rewrite this state so you group all terms with identical $f(x)$ — observe the periodicity in the amplitudes which emerges, and observe also that you cannot efficiently reveal the period by any measurement.
+
+    \begin{answer}
+       	This means that the $y$ register is in the state $\rsqrt{2}\left(\ket{1} + \ket{8}\right)$.
+
+       	For this simple example you might be able to measure 100 times. If you measure $\ket{1}$ 31 times and $\ket{8}$ 69 times it is probable that the period is 2 because you only measured 2 different outcomes. In general, there is a chance that if you measure $k$ times you will have not measured one or more possible outcomes which causes you to use an $r$ that is too low. For bigger N, the amount of measurements $k$ becomes very, very large to have confidence in your estimation of $r$.
+
+       	Using the QFT is far more efficient.
+    \end{answer}
+
+    \item Apply the Quantum Fourier Transform to the top register.
+
+    \begin{answer}
+    	We apply the Quantum Fourier Transform to the top register after measurement of the bottom register.
+    	do the math labz
+    	In the case that we measure $y = \ket{1}$.
+    \end{answer}
+\end{enumerate}
 
 \end{document}
 
