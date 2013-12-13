@@ -67,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
   </style></head><body><div class="content"><pre class="codeinput">N = 16;
 x1 = (0:N - 1)'; <span class="comment">% x register in maximal superposition</span>
-y = mod(10.^x1, 21); <span class="comment">% y register after modular exponentiation</span>
+y = mod(8.^x1, 21); <span class="comment">% y register after modular exponentiation</span>
 
 QFT4 = qft(4);
 
@@ -85,11 +85,11 @@ X = zeros(length(y), noutcomes);
 	subplot(1,2,2); stem(x1, abs(QFT4*x2));
 	title([<span class="string">'QFT4*x'</span>]);
 <span class="keyword">end</span>
-</pre><img vspace="5" hspace="5" src="code_01.png" alt=""> <img vspace="5" hspace="5" src="code_02.png" alt=""> <img vspace="5" hspace="5" src="code_03.png" alt=""> <img vspace="5" hspace="5" src="code_04.png" alt=""> <img vspace="5" hspace="5" src="code_05.png" alt=""> <img vspace="5" hspace="5" src="code_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="code_01.png" alt=""> <img vspace="5" hspace="5" src="code_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 N = 16;
 x1 = (0:N - 1)'; % x register in maximal superposition
-y = mod(10.^x1, 21); % y register after modular exponentiation
+y = mod(8.^x1, 21); % y register after modular exponentiation
 
 QFT4 = qft(4);
 

@@ -1,6 +1,6 @@
 N = 16;
 x1 = (0:N - 1)'; % x register in maximal superposition
-y = mod(10.^x1, 21); % y register after modular exponentiation
+y = mod(8.^x1, 21); % y register after modular exponentiation
 
 QFT4 = qft(4);
 
