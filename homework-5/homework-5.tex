@@ -156,6 +156,31 @@
     \end{answer}
 \end{enumerate}
 
-\paragraph{Problem 2: }
+\paragraph{Problem 2: Three-qubit bit flip code} \hfill
+
+Consider the 3-qubit bit-flip code as covered in the lectures. In this code, a one-qubit state $\ket{\psi} = \alpha\ket{0_2} + \beta\ket{1_2}$ is encoded as $\ket{\Psi} = \alpha\ket{0_30_20_1} + \beta\ket{1_31_21_1}$.
+
+\begin{enumerate}
+	\item Suppose the encoded state is distorted by a rotation of $60\deg$ about the $+\hat{x}$ axis of qubit 3. What are the possible error syndromes you could measure (i.e., the measurement results $m_a$ and $m_b$)? Show that the state $\ket{\Psi}$ is recovered after error correction, every time.
+
+	\begin{answer}
+		Since the distortion is not a full flip you can measure qubit 3 as either $-1$ or $+1$. The other two bits are not affected and will retain their (equal) states.
+
+		The $Z$ (parity) measurement $m_a$ of qubits $q_1$ and $q_2$ will always give $m = -1$ because $q_1 = q_2$. Since the same does not hold for qubit $q_3$ you will measure $m = \pm1$.
+
+		The error syndromes thus are $m_a = -1, m_b = -1$ and $m_a = -1, m_b = +1$. In the first case you won't have to do anything. In the second case you will have to flip qubit $q_3$ back.
+	\end{answer}
+
+	\item Suppose now that instead the encoded state is distorted by a rotation of $45\deg$ about the $+\hat{y}$ axis of qubit $q_2$, but you don't know it and stick to using the bit flip code without modifications. What are the possible error syndromes you would measure? Can you recover the state $\ket{\Psi}$ every time? When do you succeed and when do you not? When you don't recover it, what is the erroneous final state of the logical qubit?
+
+	\begin{answer}
+		This time we apply a maybe-$Y$ gate to qubit $q_2$. Since $Y = iXZ$ and the measurements we perform are two $Z$ measurement, we can make some conclusions about the different cases.
+
+		We can recover the error when the state becomes $X\ket{\Psi}$ because the syndrome is $m_a = -1, m_b = -1$. I
+	\end{answer}
+
+\end{enumerate}
+
+
 \end{document}
 
